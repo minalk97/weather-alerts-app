@@ -55,8 +55,6 @@ export const AlertProvider: React.FC<{ children: React.ReactNode }> = ({
   } = useQuery({
     queryKey: ["weatherAlert", selectedState],
     queryFn: () => fetchWeatherAlertData(selectedState),
-    staleTime: 0,
-    retry: 3,
   });
 
   // Fetch alerts when a zone is selected
@@ -103,8 +101,8 @@ export const AlertProvider: React.FC<{ children: React.ReactNode }> = ({
 
     processedAlerts.sort((a: WeatherAlert, b: WeatherAlert) => {
       if (["sent", "effective", "expires"].includes(sortBy)) {
-        const dateA = new Date(a.properties[sortBy]).getTime();
-        const dateB = new Date(b.properties[sortBy]).getTime();
+        const dateA = new Date(a.properties[sortBy] as string).getTime();
+        const dateB = new Date(b.properties[sortBy] as string).getTime();
         return sortDirection === "asc" ? dateA - dateB : dateB - dateA;
       } else if (sortBy === "severity") {
         const severityA = severityOrder[a.properties.severity] || 0;

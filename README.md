@@ -13,25 +13,24 @@ A React-based dashboard for monitoring and managing weather alerts across differ
   - Severity level
   - Urgency level
 - Sorting capabilities for:
-  - Date sent
-  - Effective date
-  - Expiration date
-  - Severity
-  - Other alert properties
+  - Newest First
+  - Oldest First
+  - Severity (High to Low)
+  - Severity (Low to High)
+  - Expiring Soon
 
 ### User Interface
 - Clean, responsive design
 - Expandable text sections with "Read More" functionality
 - Severity-based color coding
 - Pagination for large datasets
-- Loading states and error handling
+- Loading states
 
 ### Technical Features
 - TypeScript implementation
 - React Query for data fetching
 - Material-UI components
 - Context-based state management
-- Comprehensive unit testing
 
 ## 🛠 Technology Stack
 
