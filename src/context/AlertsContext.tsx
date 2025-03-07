@@ -33,7 +33,6 @@ type AlertContextType = {
   error: unknown;
 };
 
-// 🔹 Create Context
 const AlertContext = createContext<AlertContextType | undefined>(undefined);
 
 export const AlertProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -72,7 +71,7 @@ export const AlertProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     if (!rawAlerts) {
-      setAlerts([]); // Reset if no data
+      setAlerts([]);
       return;
     }
 

@@ -21,7 +21,6 @@ export const SortAlerts: FC = () => {
     { value: "expires-asc", label: "Expiring Soon" },
   ];
 
-  // Function to handle sort change
   const handleSortChange = (e: SelectChangeEvent): void => {
     const value = e.target.value;
     const [field, direction] = value.split("-");

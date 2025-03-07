@@ -1,13 +1,3 @@
-// Root response type
-export type WeatherAlertResponse = {
-  type: string;
-  features: WeatherAlert[];
-  title: string;
-  updated: string;
-  pagination?: Pagination;
-};
-
-// Represents an individual alert
 export type WeatherAlert = {
   id: string;
   type: string;
@@ -37,9 +27,4 @@ export type WeatherAlertProperties = {
   description: string;
   instruction: string;
   response: string;
-};
-
-// Pagination data
-export type Pagination = {
-  next?: string;
 };

@@ -1,8 +1,3 @@
-// export type ZoneInfo = {
-//   type: "FeatureCollection";
-//   features: ZoneFeature[];
-// };
-
 export type ZoneFeature = {
   id: string;
   type: "Feature";
@@ -11,6 +6,6 @@ export type ZoneFeature = {
 
 export type ZoneProperties = {
   id: string;
-  type: "land" | "marine"; // Assuming it could be either
+  type: "land" | "marine";
   name: string;
 };

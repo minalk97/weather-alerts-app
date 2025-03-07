@@ -3,7 +3,7 @@ import { ZoneFeature } from "../types/ZoneInfo.ts";
 
 export const fetchWeatherAlertData = async (selectedState: string) => {
   const url = selectedState
-    ? `https://api.weather.gov/alerts?area=${selectedState}` // State-specific API
+    ? `https://api.weather.gov/alerts?area=${selectedState}`
     : "https://api.weather.gov/alerts/active";
   const response = await axios.get(url);
   return response.data.features;

@@ -7,14 +7,12 @@ import {
   fetchAlertsByZone,
 } from "../services/WeatherAPI";
 
-// Mock the API calls
 jest.mock("../services/WeatherAPI", () => ({
   fetchWeatherAlertData: jest.fn(),
   fetchAlertsByZone: jest.fn(),
 }));
 
 describe("AlertsContext", () => {
-  // Setup QueryClient for tests
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -23,13 +21,12 @@ describe("AlertsContext", () => {
     },
   });
 
-  // Create a wrapper component for testing hooks
   const wrapper: FC<{ children: ReactNode }> = ({ children }) => (
     <QueryClientProvider client={queryClient}>
       <AlertProvider>{children}</AlertProvider>
     </QueryClientProvider>
   );
-  // Mock data
+
   const mockWeatherAlerts = [
     {
       id: "1",
@@ -49,7 +46,7 @@ describe("AlertsContext", () => {
       type: "Feature",
       properties: {
         id: "alert2",
-        status: "Test", // This should be filtered out
+        status: "Test",
         severity: "Minor",
         urgency: "Expected",
         sent: "2024-03-07T11:00:00Z",
@@ -60,17 +57,14 @@ describe("AlertsContext", () => {
   ];
 
   beforeEach(() => {
-    // Clear all mocks before each test
     jest.clearAllMocks();
 
-    // Reset QueryClient
     queryClient.clear();
 
     (fetchWeatherAlertData as jest.Mock)
-      .mockResolvedValueOnce([]) // First call returns empty array
+      .mockResolvedValueOnce([])
       .mockResolvedValue(mockWeatherAlerts);
 
-    // Setup default mock implementations
     (fetchWeatherAlertData as jest.Mock).mockResolvedValue(mockWeatherAlerts);
     (fetchAlertsByZone as jest.Mock).mockResolvedValue(mockWeatherAlerts);
   });
@@ -120,7 +114,6 @@ describe("AlertsContext", () => {
       wrapper,
     });
 
-    // Wait for the alerts to be processed
     await act(async () => {
       result.current.setSelectedState("CA");
     });
@@ -170,7 +163,6 @@ describe("AlertsContext", () => {
       result.current.setSortDirection("asc");
     });
 
-    // Verify ascending order
     const dates = result.current.alerts.map((alert) =>
       new Date(alert.properties.sent).getTime(),
     );
@@ -194,7 +186,6 @@ describe("AlertsContext", () => {
       Unknown: 0,
     };
 
-    // Verify descending severity order
     const alerts = result.current.alerts;
     for (let i = 1; i < alerts.length; i++) {
       const prev = severityOrder[alerts[i - 1].properties.severity];
@@ -232,9 +223,7 @@ describe("AlertsContext", () => {
     expect(fetchAlertsByZone).toHaveBeenCalledWith("zone1");
   });
 
-  // Test loading states
   it("should show loading state while fetching alerts", async () => {
-    // Mock a delay in the API response
     (fetchWeatherAlertData as jest.Mock).mockImplementation(
       () =>
         new Promise((resolve) =>
@@ -250,7 +239,6 @@ describe("AlertsContext", () => {
 
     expect(result.current.loadingAlerts).toBe(true);
 
-    // Wait for the loading to complete
     await act(async () => {
       await new Promise((resolve) => setTimeout(resolve, 150));
     });

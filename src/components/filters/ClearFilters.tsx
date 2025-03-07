@@ -1,4 +1,4 @@
-import { FC, Dispatch, SetStateAction } from "react";
+import { FC } from "react";
 import { Button } from "@mui/material";
 import { useAlertContext } from "../../context/AlertsContext.tsx";
 
@@ -11,10 +11,10 @@ export const ClearFilters: FC = () => {
   } = useAlertContext();
 
   const clearFilters = (
-    setSelectedState: Dispatch<SetStateAction<string>>,
-    setSelectedZone: Dispatch<SetStateAction<string>>,
-    setSelectedSeverity: Dispatch<SetStateAction<string>>,
-    setSelectedUrgency: Dispatch<SetStateAction<string>>,
+    setSelectedState: (state: string) => void,
+    setSelectedZone: (zone: string) => void,
+    setSelectedSeverity: (severity: string) => void,
+    setSelectedUrgency: (urgency: string) => void,
   ) => {
     setSelectedState("");
     setSelectedZone("");

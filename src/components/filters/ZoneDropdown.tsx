@@ -36,8 +36,8 @@ export const ZoneDropdown: FC = () => {
         MenuProps={{
           PaperProps: {
             style: {
-              maxHeight: 300, // Set height limit
-              width: 200, // Set proper width
+              maxHeight: 300,
+              width: 200,
             },
           },
         }}

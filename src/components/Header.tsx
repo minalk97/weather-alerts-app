@@ -48,11 +48,11 @@ const Header: FC = () => {
         backgroundColor: "#649bda",
         padding: "8px",
         color: "white",
-        width: "100vw", // Full viewport width
-        position: "fixed", // Fix it at the top
+        width: "100vw",
+        position: "fixed",
         top: 0,
         left: 0,
-        zIndex: 1000, // Ensure it stays on top
+        zIndex: 1000,
       }}
     >
       <Button
