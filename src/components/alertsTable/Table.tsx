@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 
 import {
   Table,
@@ -31,11 +31,16 @@ export const AlertsTable: FC = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const handlePageChange = (event, newPage) => {
+  const handlePageChange = (
+    _event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number,
+  ) => {
     setPage(newPage);
   };
 
-  const handleRowsPerPageChange = (event) => {
+  const handleRowsPerPageChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -73,11 +78,12 @@ export const AlertsTable: FC = () => {
       .format(startDate)
       .split(" ")[1];
 
-    const formattedDate: string = dateFormatter.format(startDate);
+    const formattedStartDate: string = dateFormatter.format(startDate);
     const startTime: string = timeFormatter.format(startDate);
+    const formattedEndDate: string = dateFormatter.format(endDate);
     const endTime: string = timeFormatter.format(endDate);
 
-    return `${formattedDate}, ${startTime} ${timezoneAbbr} – ${endTime} ${timezoneAbbr}`;
+    return `${formattedStartDate}, ${startTime} – ${formattedEndDate}, ${endTime} ${timezoneAbbr}`;
   };
 
   return (

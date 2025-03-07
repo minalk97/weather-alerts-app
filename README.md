@@ -1,54 +1,81 @@
-# React + TypeScript + Vite
+# Weather Alerts Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🌟 Overview
+A React-based dashboard for monitoring and managing weather alerts across different states and zones. The application provides real-time weather alerts with filtering, sorting, and detailed information display capabilities.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Alert Management
+- Real-time weather alert monitoring
+- Filtering by:
+  - State
+  - Zone
+  - Severity level
+  - Urgency level
+- Sorting capabilities for:
+  - Date sent
+  - Effective date
+  - Expiration date
+  - Severity
+  - Other alert properties
 
-## Expanding the ESLint configuration
+### User Interface
+- Clean, responsive design
+- Expandable text sections with "Read More" functionality
+- Severity-based color coding
+- Pagination for large datasets
+- Loading states and error handling
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Technical Features
+- TypeScript implementation
+- React Query for data fetching
+- Material-UI components
+- Context-based state management
+- Comprehensive unit testing
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🛠 Technology Stack
+
+- **Frontend Framework**: React 18+
+- **Language**: TypeScript
+- **UI Library**: Material-UI (MUI)
+- **State Management**: React Context
+- **Data Fetching**: TanStack Query (React Query)
+- **Testing**: Jest & React Testing Library
+- **Build Tool**: Vite/Create React App
+
+## 📋 Prerequisites
+
+- Node.js (v16+)
+- npm or yarn
+- Git
+
+## 🚦 Getting Started
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/yourusername/weather-alerts-dashboard.git
+cd weather-alerts-dashboard
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. **Install dependencies**
+```bash
+npm install
+# or
+yarn install
 ```
+
+3. **Start the development server**
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+
+## Acknowledgments
+Weather data provided by [Weather Service Provider]
+Icons from Material-UI
+
+## Future Improvements
+- Implement performance optimizations

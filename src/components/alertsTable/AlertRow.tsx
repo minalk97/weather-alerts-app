@@ -1,8 +1,19 @@
+import { FC } from "react";
 import { TableCell, TableRow } from "@mui/material";
 import ReadMore from "./ReadMore.tsx";
 import { AlertSeverityIcon } from "./AlertSeverityIcon.tsx";
+import { WeatherAlert } from "../../types/WeatherAlert.ts";
 
-export const AlertRow = (props) => {
+type propsType = {
+  alert: WeatherAlert;
+  formatEventTimeWithTimezoneAbbreviation: (
+    effective: string,
+    expires: string,
+  ) => string;
+  whatPattern: RegExp;
+  impactsPattern: RegExp;
+};
+export const AlertRow: FC<propsType> = (props) => {
   const {
     alert,
     formatEventTimeWithTimezoneAbbreviation,

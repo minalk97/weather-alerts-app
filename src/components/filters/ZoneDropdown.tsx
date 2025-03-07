@@ -42,13 +42,11 @@ export const ZoneDropdown: FC = () => {
           },
         }}
       >
-        {zones
-          ?.sort((a, b) => a - b)
-          .map((zone: zoneType) => (
-            <MenuItem key={zone.id} value={zone.id}>
-              {zone.name}
-            </MenuItem>
-          ))}
+        {zones?.map((zone: zoneType) => (
+          <MenuItem key={zone.id} value={zone.id}>
+            {zone.name}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );
