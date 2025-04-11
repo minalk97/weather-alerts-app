@@ -4,9 +4,12 @@ export type WeatherAlert = {
   properties: WeatherAlertProperties;
 };
 
+export type Severity = "Extreme" | "Severe" | "Moderate" | "Minor" | "Unknown";
+
+export type Urgency = "Immediate" | "Expected" | "Future" | "Past" | "Unknown";
+
 // Properties of an alert
 export type WeatherAlertProperties = {
-  [key: string]: string | number | undefined;
   id: string;
   areaDesc: string;
   sent: string;
@@ -17,9 +20,9 @@ export type WeatherAlertProperties = {
   status: "Actual" | "Test" | "Exercise" | "System";
   messageType: "Alert" | "Update" | "Cancel" | "Ack";
   category: "Met" | "Geo" | "Safety" | "Security";
-  severity: "Extreme" | "Severe" | "Moderate" | "Minor";
+  severity: Severity;
   certainty: "Observed" | "Likely" | "Possible" | "Unlikely";
-  urgency: "Immediate" | "Expected" | "Future" | "Past";
+  urgency: Urgency;
   event: string;
   sender: string;
   senderName: string;

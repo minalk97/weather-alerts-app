@@ -1,4 +1,4 @@
-const stateNames: { [key: string]: string } = {
+const stateNames = {
   AL: "Alabama",
   AK: "Alaska",
   AZ: "Arizona",

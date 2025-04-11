@@ -7,11 +7,12 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { useAlertContext } from "../../context/AlertsContext.tsx";
+import { Severity } from "../../types/WeatherAlert.ts";
 
 export const SeverityDropdown: FC = () => {
   const { selectedSeverity, setSelectedSeverity } = useAlertContext();
 
-  const severityLevels: string[] = [
+  const severityLevels: Severity[] = [
     "Extreme",
     "Severe",
     "Moderate",

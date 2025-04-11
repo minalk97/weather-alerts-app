@@ -1,11 +1,18 @@
 import { FC } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useAlertContext } from "../../context/AlertsContext.tsx";
+import { Urgency } from "../../types/WeatherAlert.ts";
 
 export const UrgencyDropdown: FC = () => {
   const { selectedUrgency, setSelectedUrgency } = useAlertContext();
   // Urgency levels for filtering
-  const urgencyLevels = ["Immediate", "Expected", "Future", "Past", "Unknown"];
+  const urgencyLevels: Urgency[] = [
+    "Immediate",
+    "Expected",
+    "Future",
+    "Past",
+    "Unknown",
+  ];
 
   return (
     <FormControl fullWidth sx={{ flex: "1 1 45%", minWidth: "200px", mr: 2 }}>

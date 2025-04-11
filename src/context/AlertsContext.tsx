@@ -1,16 +1,12 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   fetchWeatherAlertData,
   fetchAlertsByZone,
 } from "../services/WeatherAPI";
-import { WeatherAlert, WeatherAlertProperties } from "../types/WeatherAlert";
-
-type SeverityOrder = {
-  [key in WeatherAlertProperties["severity"]]: number;
-} & {
-  Unknown: number;
-};
+import { WeatherAlert } from "../types/WeatherAlert";
+import { sortAlerts } from "../SortAlerts.ts";
+import { filterAlerts } from "../FilterAlerts.ts";
 
 type AlertContextType = {
   alerts: WeatherAlert[];
@@ -35,7 +31,7 @@ type AlertContextType = {
 
 const AlertContext = createContext<AlertContextType | undefined>(undefined);
 
-export const AlertProvider: React.FC<{ children: React.ReactNode }> = ({
+const AlertProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [selectedState, setSelectedState] = useState<string>("");
@@ -67,65 +63,29 @@ export const AlertProvider: React.FC<{ children: React.ReactNode }> = ({
     ? loadingZoneAlerts
     : loadingStateAlerts;
 
-  const rawAlerts = selectedZone ? zoneAlerts : stateAlerts;
-
   useEffect(() => {
-    if (!rawAlerts) {
+    const fetchedAlerts = selectedZone ? zoneAlerts : stateAlerts;
+
+    if (!fetchedAlerts) {
       setAlerts([]);
       return;
     }
 
-    let processedAlerts = rawAlerts.filter(
-      (alert: WeatherAlert) => alert.properties.status !== "Test",
+    const filteredAlerts = filterAlerts(
+      fetchedAlerts,
+      selectedSeverity,
+      selectedUrgency,
     );
 
-    if (selectedSeverity) {
-      processedAlerts = processedAlerts.filter(
-        (alert: WeatherAlert) => alert.properties.severity === selectedSeverity,
-      );
-    }
-    if (selectedUrgency) {
-      processedAlerts = processedAlerts.filter(
-        (alert: WeatherAlert) => alert.properties.urgency === selectedUrgency,
-      );
-    }
-
-    const severityOrder: SeverityOrder = {
-      Extreme: 4,
-      Severe: 3,
-      Moderate: 2,
-      Minor: 1,
-      Unknown: 0,
-    };
-
-    processedAlerts.sort((a: WeatherAlert, b: WeatherAlert) => {
-      if (["sent", "effective", "expires"].includes(sortBy)) {
-        const dateA = new Date(a.properties[sortBy] as string).getTime();
-        const dateB = new Date(b.properties[sortBy] as string).getTime();
-        return sortDirection === "asc" ? dateA - dateB : dateB - dateA;
-      } else if (sortBy === "severity") {
-        const severityA = severityOrder[a.properties.severity] || 0;
-        const severityB = severityOrder[b.properties.severity] || 0;
-        return sortDirection === "asc"
-          ? severityA - severityB
-          : severityB - severityA;
-      } else {
-        const valueA = String(a.properties[sortBy] || "");
-        const valueB = String(b.properties[sortBy] || "");
-        return sortDirection === "asc"
-          ? valueA.localeCompare(valueB)
-          : valueB.localeCompare(valueA);
-      }
-    });
-
-    setAlerts(processedAlerts);
+    setAlerts(sortAlerts(filteredAlerts, sortBy, sortDirection));
   }, [
-    rawAlerts,
-    selectedZone,
     selectedSeverity,
     selectedUrgency,
+    selectedZone,
     sortBy,
     sortDirection,
+    stateAlerts,
+    zoneAlerts,
   ]);
 
   const contextValue: AlertContextType = {
@@ -156,10 +116,12 @@ export const AlertProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export const useAlertContext = (): AlertContextType => {
+const useAlertContext = (): AlertContextType => {
   const context = useContext(AlertContext);
   if (context === undefined) {
     throw new Error("useAlertContext must be used within an AlertProvider");
   }
   return context;
 };
+
+export { useAlertContext, AlertProvider };
