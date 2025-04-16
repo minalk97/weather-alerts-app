@@ -32,10 +32,10 @@ export const AlertRow: FC<propsType> = (props) => {
     instruction,
   } = properties;
 
-  const whatMatch = description.match(whatPattern);
+  const whatMatch = description?.match(whatPattern);
   const what = whatMatch ? whatMatch[1].trim() : "";
 
-  const impactsMatch = description.match(impactsPattern);
+  const impactsMatch = description?.match(impactsPattern);
   const impacts = impactsMatch ? impactsMatch[1].trim() : "";
   return (
     <>

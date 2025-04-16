@@ -6,6 +6,7 @@ import { AlertProvider } from "./context/AlertsContext";
 import { Filters } from "./components/filters/Filters";
 import { ClearFilters } from "./components/filters/ClearFilters";
 import { SortAlerts } from "./components/Sorting/SortAlerts";
+import Footer from "./components/Footer.tsx";
 
 const App: FC = () => {
   return (
@@ -32,6 +33,7 @@ const App: FC = () => {
 
         <AlertsTable />
       </Box>
+      <Footer />
     </AlertProvider>
   );
 };

@@ -12,9 +12,12 @@ export const AlertSeverityIcon: FC<AlertSeverityIconProps> = ({ severity }) => {
   const getSeverityIcon = (severity: WeatherAlertProperties["severity"]) => {
     switch (severity) {
       case "Extreme":
-        return [...Array(2)].map((_, index) => (
-          <PriorityHighIcon key={index} sx={{ color: "red", fontSize: 24 }} />
-        ));
+        return (
+          <>
+            <PriorityHighIcon sx={{ color: "red", fontSize: 24 }} />
+            <PriorityHighIcon sx={{ color: "red", fontSize: 24 }} />
+          </>
+        );
       case "Severe":
         return <PriorityHighIcon sx={{ color: "red", fontSize: 24 }} />;
       case "Moderate":

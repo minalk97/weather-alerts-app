@@ -10,7 +10,11 @@ import {
   TablePagination,
   Paper,
   Typography,
+  Box,
 } from "@mui/material";
+import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import styled from "styled-components";
 
 import { LoadingComponent } from "../Loading.tsx";
@@ -88,10 +92,73 @@ export const AlertsTable: FC = () => {
 
   return (
     <>
-      <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 1 }}>
-        Showing {paginatedAlerts.length} of {alerts.length} active alerts
-      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 1 }}>
+          Showing {paginatedAlerts.length} of {alerts.length} active alerts
+        </Typography>
 
+        <Box
+          sx={{
+            display: "flex",
+          }}
+        >
+          <Typography
+            variant="caption"
+            gutterBottom
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              marginRight: "10px",
+            }}
+          >
+            <Box sx={{ display: "flex" }}>
+              <PriorityHighIcon sx={{ color: "red", fontSize: 24 }} />
+              <PriorityHighIcon sx={{ color: "red", fontSize: 24 }} />
+            </Box>
+            Extreme
+          </Typography>
+
+          <Typography
+            variant="caption"
+            gutterBottom
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              marginRight: "10px",
+            }}
+          >
+            <PriorityHighIcon sx={{ color: "red", fontSize: 24 }} />
+            <Typography variant="caption">Severe</Typography>
+          </Typography>
+          <Typography
+            variant="caption"
+            gutterBottom
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              marginRight: "10px",
+            }}
+          >
+            <WarningAmberIcon sx={{ color: "orange", fontSize: 24 }} /> Moderate
+          </Typography>
+          <Typography
+            variant="caption"
+            gutterBottom
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              marginRight: "10px",
+            }}
+          >
+            <InfoOutlinedIcon sx={{ color: "#009CFF", fontSize: 24 }} /> Minor
+          </Typography>
+        </Box>
+      </Box>
       <TableContainer
         component={Paper}
         sx={{ borderRadius: "10px", border: "1px solid #E0E0E0", boxShadow: 0 }}
