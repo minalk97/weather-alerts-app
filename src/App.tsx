@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Card, CardContent, Box } from "@mui/material";
 import { AlertsTable } from "./components/alertsTable/Table";
 import Header from "./components/Header";
@@ -8,6 +8,7 @@ import { ClearFilters } from "./components/filters/ClearFilters";
 import { SortAlerts } from "./components/Sorting/SortAlerts";
 import Footer from "./components/Footer.tsx";
 import styled from "styled-components";
+import { initGA } from "./lib/analytics";
 
 const StyledBox = styled(Box)`
   display: flex;
@@ -19,6 +20,10 @@ const StyledBox = styled(Box)`
 `;
 
 const App: FC = () => {
+  useEffect(() => {
+    initGA();
+  }, []);
+
   return (
     <AlertProvider>
       <Header />
