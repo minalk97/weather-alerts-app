@@ -7,6 +7,16 @@ import { Filters } from "./components/filters/Filters";
 import { ClearFilters } from "./components/filters/ClearFilters";
 import { SortAlerts } from "./components/Sorting/SortAlerts";
 import Footer from "./components/Footer.tsx";
+import styled from "styled-components";
+
+const StyledBox = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+  }
+`;
 
 const App: FC = () => {
   return (
@@ -24,10 +34,10 @@ const App: FC = () => {
         >
           <CardContent>
             <Filters />
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <StyledBox>
               <SortAlerts />
               <ClearFilters />
-            </div>
+            </StyledBox>
           </CardContent>
         </Card>
 

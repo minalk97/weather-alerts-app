@@ -29,6 +29,15 @@ const StyledTableCell = styled(TableCell)`
   color: "#616161";
 `;
 
+const StyledBox = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+  }
+`;
+
 export const AlertsTable: FC = () => {
   const { alerts, loadingAlerts, isError, error } = useAlertContext();
 
@@ -92,7 +101,7 @@ export const AlertsTable: FC = () => {
 
   return (
     <>
-      <Box
+      <StyledBox
         sx={{
           display: "flex",
           justifyContent: "space-between",
@@ -158,7 +167,7 @@ export const AlertsTable: FC = () => {
             <InfoOutlinedIcon sx={{ color: "#009CFF", fontSize: 24 }} /> Minor
           </Typography>
         </Box>
-      </Box>
+      </StyledBox>
       <TableContainer
         component={Paper}
         sx={{ borderRadius: "10px", border: "1px solid #E0E0E0", boxShadow: 0 }}
